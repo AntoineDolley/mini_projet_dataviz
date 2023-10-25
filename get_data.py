@@ -18,6 +18,9 @@ def open_and_process_data(file_path: str) -> pd.DataFrame:
     # Création de la colonne 'Sector' à partir des colonnes individuelles du secteur
     sectors = ['is_software', 'is_web', 'is_mobile', 'is_enterprise', 'is_advertising', 'is_gamesvideo', 'is_ecommerce', 'is_biotech', 'is_consulting', 'is_othercategory']
     df['Sector'] = df[sectors].idxmax(axis=1)
+
+
+    df['new_total_funding_usd'] = df['funding_total_usd'].apply(lambda x: 80000000 if x >= 80000000 else x)
     
     # Mappage pour renommer les secteurs
     sector_mapping = {
@@ -65,7 +68,7 @@ def open_and_process_data(file_path: str) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    file_path = "./data/startup_data.csv"
+    file_path = "startup_data.csv"
     processed_data = open_and_process_data(file_path)
     print(processed_data.columns)
     print(processed_data.head())

@@ -1,39 +1,94 @@
-import dash
-from dash import dcc, html
 import plotly.express as px
-import pandas as pd
-import dash_bootstrap_components as dbc
-from plotly import graph_objs as go 
-import plotly.graph_objects as go
-import numpy as np
-from dash.dependencies import Input, Output
+import plotly
 
-"""colors = {
+def histofunding(df) -> plotly.graph_objs:
+    """
+    Crée un histogramme de la répartition des fonds selon le statut des entreprises.
+
+    Args:
+        df (pd.DataFrame): Les données à visualiser.
+
+    Returns:
+        plotly.graph_objs.Figure: L'objet figure contenant l'histogramme.
+    """
+
+    colors = {
     'background': '#111111',
     'text': '#7FDBFF'
-}"""
+    }
 
-def histofunding(df,colors):
-    df['new_total_funding_usd'] = df['funding_total_usd'].apply(lambda x: 80000000 if x >= 80000000 else x)
-    
+    # Définir les valeurs de graduation pour l'axe x
     tickvaleurs = [0,4000000,8000000, 12000000,16000000, 20000000, 30000000, 40000000, 50000000,60000000,70000000,80000000]
 
+    # Créer l'histogramme
     fig = px.histogram(df,x='new_total_funding_usd',color='status',color_discrete_map={'acquired': '#4831D4', 'closed': '#FF69B4'})
 
+    # Mettre à jour les graduations de l'axe x
     fig.update_xaxes(tickvals=tickvaleurs, ticktext=['0','4M','8M','12M','16M','20M','30M','40M','50M','60M','70M','>80M'],tickmode='array')
+
+    # Mettre à jour la taille des barres
     fig.update_traces(xbins_size=4000000)
+
+    # Mettre à jour le titre de l'axe x et les couleurs de fond
     fig.update_xaxes(title_text='Funding Total (USD)')
     fig.update_layout(
     plot_bgcolor=colors['background'],
     paper_bgcolor=colors['background'])
     return fig
 
+def barSector(df) -> plotly.graph_objs.Figure:
+    """
+    Crée un graphique en barres de la proportion d'entreprises acquises par secteur.
 
+    Args:
+        df (pd.DataFrame): Les données à visualiser.
 
-def barSector(df):
+    Returns:
+        plotly.graph_objs.Figure: L'objet figure contenant le graphique en barres.
+    """
+    # Calculer la proportion d'entreprises acquises par secteur
     category_proportions = df.groupby('Sector')['status'].apply(lambda x: (x == 'acquired').mean()).reset_index(name='proportion')
-    px.bar(category_proportions, x='Sector', y='proportion',
-                              labels={'new_total_funding_usd': 'Funding Total (en USD)'},
-                              color='Sector',
-                              title='Proportion of Acquired Companies by Sector',
-                              )
+
+    # Créer le graphique en barres
+    fig = px.bar(
+        category_proportions, x='Sector', y='proportion',
+        labels={'new_total_funding_usd': 'Funding Total (en USD)'},
+        color='Sector',
+        title='Proportion of Acquired Companies by Sector',
+    )
+    return fig
+
+def historelation(df) -> plotly.graph_objs.Figure:
+    """
+    Crée un histogramme de la répartition des relations selon le statut des entreprises.
+
+    Args:
+        df (pd.DataFrame): Les données à visualiser.
+
+    Returns:
+        plotly.graph_objs.Figure: L'objet figure contenant l'histogramme.
+    """
+    # Créer l'histogramme
+    fig = px.histogram(df,x='relationships',color='status',color_discrete_map={'acquired': '#4831D4', 'closed': '#FF69B4'})
+
+    # Mettre à jour la taille des barres
+    fig.update_traces(xbins_size=2)
+    return fig
+
+
+def create_graphs_dict(df) -> dict:
+    """
+    Crée un dictionnaire de graphiques à partir des données fournies.
+
+    Args:
+        df (pd.DataFrame): Les données à visualiser.
+
+    Returns:
+        dict: Un dictionnaire contenant les graphiques.
+    """
+    graphs_dict = {
+        'histofunding': histofunding(df),
+        'barSector': barSector(df),
+        'historelation': historelation(df),
+    }
+    return graphs_dict

@@ -2,62 +2,75 @@ import dash
 from dash import dcc, html, Input, Output
 from map_visualization import create_3maps_dict
 from generate_geodata import get_geodata
+from get_graphs import create_graphs_dict
+from get_data import open_and_process_data
 
-def create_dashboard(map_dict) -> dash.Dash:
-    """
-    Crée un tableau de bord interactif Dash avec des cartes visualisant différentes informations sur les start-ups.
-    
-    Args:
-        map_dict (dict): Un dictionnaire contenant des objets de carte pour chaque visualisation.
-
-    Returns:
-        dash.Dash: L'application Dash configurée.
-    """
-    
-    app = dash.Dash()
+def create_dashboard(map_dict, graph_dict) -> dash.Dash:
+    app = dash.Dash(__name__)
 
     app.layout = html.Div(
         [
-            html.H1(children='How start-up succeed in America'), #Ajout du titre de la page
+            html.H2(children='How start-up succeed in America'),
 
-            dcc.Dropdown( # Ajout du slider pour choisir entre les diffrent graphiques
+            dcc.Dropdown(
                 id="map-selector",
                 options=[
                     {"label": "General Data", "value": "startups"},
                     {"label": "Average Relationships", "value": "relationships"},
                     {"label": "Start-up Success Ratio per Region", "value": "success_ratio"},
                 ],
-                value="startups", #valeur pr default
+                value="startups",
             ),
-            html.Iframe( # Affichage de la carte
+            html.Iframe(
                 id="map-container",
                 width="100%",
-                height="600px",
+                height="400px",  # Réduit la hauteur de l'iframe
                 srcDoc=map_dict["startups"].get_root().render(),
             ),
-
-
-        ]
+            html.Div(
+                [
+                    dcc.Dropdown(
+                        id="graph-selector",
+                        options=[
+                            {"label": key, "value": key} for key in graph_dict.keys()
+                        ],
+                        value=list(graph_dict.keys())[0],
+                    ),
+                    dcc.Graph(
+                        id="graph-container1",
+                    ),
+                ],
+                style={'width': '100%', 'display': 'inline-block'},
+            ),
+        ],
     )
 
-    @app.callback(Output("map-container", "srcDoc"), [Input("map-selector", "value")])
+    @app.callback(
+        Output("map-container", "srcDoc"),
+        [Input("map-selector", "value")],
+    )
     def update_map(selected_map):
-        """
-        Met à jour la carte affichée en fonction de la sélection de l'utilisateur.
-
-        Args:
-            selected_map (str): La valeur sélectionnée par l'utilisateur, qui détermine quelle carte afficher.
-
-        Returns:
-            str: Le code HTML à injecter dans la balise iframe pour afficher la carte sélectionnée.
-        """
         return map_dict[selected_map].get_root().render()
-    
+
+    @app.callback(
+        Output("graph-container1", "figure"),
+        [Input("graph-selector", "value")],
+    )
+    def update_graph(selected_graph):
+        if selected_graph in graph_dict:
+            fig1 = graph_dict[selected_graph]
+        else:
+            fig1 = {}
+        return fig1
+
     return app
 
 
 if __name__ == "__main__":
     startUp_data = get_geodata()
+    file_path = "startup_data.csv"
+    df = open_and_process_data(file_path)
     map_dict = create_3maps_dict(startUp_data)
-    app = create_dashboard(map_dict)
-    app.run_server(port=8051, debug=True)
+    graph_dict = create_graphs_dict(df)
+    app = create_dashboard(map_dict, graph_dict)
+    app.run_server(debug=True)
