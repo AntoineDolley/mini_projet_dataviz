@@ -100,7 +100,7 @@ def create_graphs_dict(df) -> dict:
         dict: Un dictionnaire contenant les graphiques.
     """
     histo_dict = {
-        'réussite par fonds': histofunding(df),
-        'réussite par relation': historelation(df),
+        'Réussite par fonds': histofunding(df),
+        'Réussite par relation': historelation(df),
     }
     return histo_dict

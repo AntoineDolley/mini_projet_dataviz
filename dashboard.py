@@ -29,10 +29,10 @@ def create_dashboard(map_dict, graph_dict) -> dash.Dash:
                     width="80%",
                     height="400px",  # Réduit la hauteur de l'iframe
                     srcDoc=map_dict["startups"].get_root().render(),
-                    style={'display': 'block', 'margin': 'auto'}
+                    style={'display': 'block', 'margin':'auto'}
                 )
                 ],
-                style={'backgroundColor': '#252e3f'}
+                style={'backgroundColor': '#252e3f','margin-left': '15px','margin-right':'15px'},
             ),
             html.Div(
             [
@@ -43,7 +43,7 @@ def create_dashboard(map_dict, graph_dict) -> dash.Dash:
                             figure=barSector(df)
                         ),
                     ],
-                    style={'width': '50%', 'display': 'inline-block','backgroundColor': '#2c3e50', 'color': '#ecf0f1'},
+                    style={'width': '48%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#01B8AA','margin-left': '17px','padding-bottom':'16px'},
                 ),
                 html.Div(
                     [
@@ -53,13 +53,13 @@ def create_dashboard(map_dict, graph_dict) -> dash.Dash:
                                 {"label": key, "value": key} for key in graph_dict.keys()
                             ],
                             value=list(graph_dict.keys())[0],
-                            style={'backgroundColor': '#252e3f', 'color': '#ecf0f1'},
+                            style={'backgroundColor': '#252e3f', 'color': '#01B8AA','font-family': 'Arial, sans-serif','margin-right': '300px'},
                         ),
                         dcc.Graph(
                             id="graph-container1",
                         ),
                     ],
-                    style={'width': '50%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#ecf0f1'},
+                    style={'width': '48%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#01B8AA', 'margin-left': '20px', 'padding-bottom': '13px'},
                 ),
             ],
         ),
