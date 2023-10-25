@@ -32,8 +32,10 @@ def histofunding(df) -> plotly.graph_objs:
     # Mettre à jour le titre de l'axe x et les couleurs de fond
     fig.update_xaxes(title_text='Funding Total (USD)')
     fig.update_layout(
-    plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background'])
+    plot_bgcolor='#34495e',   # Dark background for the plot
+    paper_bgcolor='#252e3f',  # Dark background surrounding the plot
+    font=dict(color='#01B8AA')  # Light font color
+    )
     return fig
 
 def barSector(df) -> plotly.graph_objs.Figure:
@@ -56,6 +58,11 @@ def barSector(df) -> plotly.graph_objs.Figure:
         color='Sector',
         title='Proportion of Acquired Companies by Sector',
     )
+    fig.update_layout(
+    plot_bgcolor='#34495e',   # Dark background for the plot
+    paper_bgcolor='#252e3f',  # Dark background surrounding the plot
+    font=dict(color='#01B8AA')  # Light font color
+    )
     return fig
 
 def historelation(df) -> plotly.graph_objs.Figure:
@@ -73,7 +80,13 @@ def historelation(df) -> plotly.graph_objs.Figure:
 
     # Mettre à jour la taille des barres
     fig.update_traces(xbins_size=2)
+    fig.update_layout(
+    plot_bgcolor='#34495e',   # Dark background for the plot
+    paper_bgcolor='#252e3f',  # Dark background surrounding the plot
+    font=dict(color='#01B8AA')  # Light font color
+    )
     return fig
+
 
 
 def create_graphs_dict(df) -> dict:
@@ -86,9 +99,8 @@ def create_graphs_dict(df) -> dict:
     Returns:
         dict: Un dictionnaire contenant les graphiques.
     """
-    graphs_dict = {
-        'histofunding': histofunding(df),
-        'barSector': barSector(df),
-        'historelation': historelation(df),
+    histo_dict = {
+        'réussite par fonds': histofunding(df),
+        'réussite par relation': historelation(df),
     }
-    return graphs_dict
+    return histo_dict

@@ -2,14 +2,14 @@ import dash
 from dash import dcc, html, Input, Output
 from map_visualization import create_3maps_dict
 from generate_geodata import get_geodata
-from get_graphs import create_graphs_dict
+from get_graphs import create_graphs_dict,barSector
 from get_data import open_and_process_data
 
 def create_dashboard(map_dict, graph_dict) -> dash.Dash:
     app = dash.Dash(__name__)
 
-    app.layout = html.Div(
-        [
+    app.layout = html.Div(style={'backgroundColor': '#1f2630', 'color': '#ecf0f1'},
+        children=[
             html.H2(children='How start-up succeed in America'),
 
             dcc.Dropdown(
@@ -20,28 +20,49 @@ def create_dashboard(map_dict, graph_dict) -> dash.Dash:
                     {"label": "Start-up Success Ratio per Region", "value": "success_ratio"},
                 ],
                 value="startups",
-            ),
-            html.Iframe(
-                id="map-container",
-                width="100%",
-                height="400px",  # Réduit la hauteur de l'iframe
-                srcDoc=map_dict["startups"].get_root().render(),
+                style={'backgroundColor': '#252e3f', 'color': '#ecf0f1',},
             ),
             html.Div(
                 [
-                    dcc.Dropdown(
-                        id="graph-selector",
-                        options=[
-                            {"label": key, "value": key} for key in graph_dict.keys()
-                        ],
-                        value=list(graph_dict.keys())[0],
-                    ),
-                    dcc.Graph(
-                        id="graph-container1",
-                    ),
+                html.Iframe(
+                    id="map-container",
+                    width="80%",
+                    height="400px",  # Réduit la hauteur de l'iframe
+                    srcDoc=map_dict["startups"].get_root().render(),
+                    style={'display': 'block', 'margin': 'auto'}
+                )
                 ],
-                style={'width': '100%', 'display': 'inline-block'},
+                style={'backgroundColor': '#252e3f'}
             ),
+            html.Div(
+            [
+                html.Div(
+                    [
+                        dcc.Graph(
+                            id="histogram-container",
+                            figure=barSector(df)
+                        ),
+                    ],
+                    style={'width': '50%', 'display': 'inline-block','backgroundColor': '#2c3e50', 'color': '#ecf0f1'},
+                ),
+                html.Div(
+                    [
+                        dcc.Dropdown(
+                            id="graph-selector",
+                            options=[
+                                {"label": key, "value": key} for key in graph_dict.keys()
+                            ],
+                            value=list(graph_dict.keys())[0],
+                            style={'backgroundColor': '#252e3f', 'color': '#ecf0f1'},
+                        ),
+                        dcc.Graph(
+                            id="graph-container1",
+                        ),
+                    ],
+                    style={'width': '50%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#ecf0f1'},
+                ),
+            ],
+        ),
         ],
     )
 
