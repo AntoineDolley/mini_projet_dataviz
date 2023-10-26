@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.fullscreen {
+    display:inline-block;
+    position: absolute;
+    height: 1150px;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+}
+
+span.Select-clear-zone{
+        display: none;          /* Cela cache l'élément */
+        pointer-events: none;   /* Cela empêche toute interaction avec l'élément */
+}
+
+.Select-value-label{
+    color : #01B8AA;
+}
+
+.has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
+    color: #01B8AA; 
+}
+
+.folium-map .leaflet-container{
+    background-color: #252e3f !important;
+}
