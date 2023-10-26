@@ -10,20 +10,24 @@ def create_dashboard(map_dict, graph_dict) -> dash.Dash:
 
     app.layout = html.Div(style={'backgroundColor': '#1f2630', 'color': '#ecf0f1'},
         children=[
-            html.H2(children='How start-up succeed in America'),
+            html.H2(children='How start-up succeed in America',
+                    style={'text-align':'center','font-family': 'Arial, sans-serif','padding-top':'20px','color':'#01B8AA'}),
 
-            dcc.Dropdown(
-                id="map-selector",
-                options=[
-                    {"label": "General Data", "value": "startups"},
-                    {"label": "Average Relationships", "value": "relationships"},
-                    {"label": "Start-up Success Ratio per Region", "value": "success_ratio"},
-                ],
-                value="startups",
-                style={'backgroundColor': '#252e3f', 'color': '#ecf0f1',},
-            ),
-            html.Div(
-                [
+            html.Div([
+                html.Div(
+                    [
+                    dcc.Dropdown(
+                    id="map-selector",
+                    options=[
+                        {"label": "General Data", "value": "startups"},
+                        {"label": "Average Relationships", "value": "relationships"},
+                        {"label": "Start-up Success Ratio per Region", "value": "success_ratio"},
+                    ],
+                    value="startups",
+                    style={'backgroundColor': '#252e3f', 'color': '#ecf0f1','margin-right': '270px','padding-left':'250px'}
+                )],
+                style={'padding-top':'25px','padding-bottom':'25px'}
+                ),
                 html.Iframe(
                     id="map-container",
                     width="80%",
@@ -43,23 +47,26 @@ def create_dashboard(map_dict, graph_dict) -> dash.Dash:
                             figure=barSector(df)
                         ),
                     ],
-                    style={'width': '48%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#01B8AA','margin-left': '17px','padding-bottom':'16px'},
+                    style={'width': '48%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#01B8AA','margin-left': '17px','padding-bottom':'50px'},
                 ),
                 html.Div(
-                    [
-                        dcc.Dropdown(
-                            id="graph-selector",
-                            options=[
-                                {"label": key, "value": key} for key in graph_dict.keys()
-                            ],
-                            value=list(graph_dict.keys())[0],
-                            style={'backgroundColor': '#252e3f', 'color': '#01B8AA','font-family': 'Arial, sans-serif','margin-right': '300px'},
+                    [   
+                        html.Div(
+                            children =[dcc.Dropdown(
+                                id="graph-selector",
+                                options=[
+                                    {"label": key, "value": key} for key in graph_dict.keys()
+                                ],
+                                value=list(graph_dict.keys())[0],
+                                style={'backgroundColor': '#252e3f', 'color': '#01B8AA','font-family': 'Arial, sans-serif','margin-right': '140px','padding-left':'100px'},
+                            )],
+                            style={'backgroundColor': '#252e3f','padding-top':'20px'}
                         ),
                         dcc.Graph(
                             id="graph-container1",
                         ),
                     ],
-                    style={'width': '48%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#01B8AA', 'margin-left': '20px', 'padding-bottom': '13px'},
+                    style={'width': '48%', 'display': 'inline-block','backgroundColor': '#1f2630', 'color': '#01B8AA', 'margin-left': '20px', 'padding-bottom': '13px','padding-top':'20px'},
                 ),
             ],
         ),
