@@ -21,7 +21,8 @@ def histofunding(df) -> plotly.graph_objs:
     tickvaleurs = [0,4000000,8000000, 12000000,16000000, 20000000, 30000000, 40000000, 50000000,60000000,70000000,80000000]
 
     # Créer l'histogramme
-    fig = px.histogram(df,x='new_total_funding_usd',color='status',color_discrete_map={'success': '#4831D4', 'closed': '#FF69B4'})
+    fig = px.histogram(df,x='new_total_funding_usd',color='status',color_discrete_map={'success': '#03C988', 'closed': '#301E67'},
+                       title='Success based on funds')
 
     # Mettre à jour les graduations de l'axe x
     fig.update_xaxes(tickvals=tickvaleurs, ticktext=['0','4M','8M','12M','16M','20M','30M','40M','50M','60M','70M','>80M'],tickmode='array')
@@ -76,7 +77,8 @@ def historelation(df) -> plotly.graph_objs.Figure:
         plotly.graph_objs.Figure: L'objet figure contenant l'histogramme.
     """
     # Créer l'histogramme
-    fig = px.histogram(df,x='relationships',color='status',color_discrete_map={'success': '#4831D4', 'closed': '#FF69B4'})
+    fig = px.histogram(df,x='relationships',color='status',color_discrete_map={'success': '#03C988', 'closed': '#301E67'},
+                       title='Success based on relationships')
 
     # Mettre à jour la taille des barres
     fig.update_traces(xbins_size=2)
@@ -100,7 +102,7 @@ def create_graphs_dict(df) -> dict:
         dict: Un dictionnaire contenant les graphiques.
     """
     histo_dict = {
-        'Réussite par fonds': histofunding(df),
-        'Réussite par relation': historelation(df),
+        'Success based on funds': histofunding(df),
+        'Success based on relationships': historelation(df),
     }
     return histo_dict
