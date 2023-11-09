@@ -7,7 +7,7 @@ Ce projet présente un dashboard interactif qui fournit une analyse approfondie 
 Ce projet a été développé en utilisant Git pour le contrôle de version. Les mises à jour régulières ont été poussées sur le dépôt.
 
 ## Données Utilisées
-Les données pour ce projet comprennent les informations sur les startups aux États-Unis, y compris leur emplacement, le nombre de relations, les fonds reçus, et leur statut final ('acquired' ou 'closed'). Les sources des données incluent [XYZ Dataset], [ABC Survey], ses données sont issues du [data sprint #5](https://aiplanet.com/challenges/32/data-sprint-5-startup-success-prediction-32/overview/about) organisé par aiplanet
+Les données pour ce projet comprennent les informations sur les startups aux États-Unis, y compris leur emplacement, le nombre de relations, les fonds reçus, et leur statut final ('acquired' ou 'closed'). Ses données sont issues du [data sprint #5](https://aiplanet.com/challenges/32/data-sprint-5-startup-success-prediction-32/overview/about) organisé par aiplanet.
 
 ## User Guide
 Pour configurer le projet localement :
@@ -34,7 +34,7 @@ Le projet est structuré en plusieurs modules Python, chacun ayant un rôle spé
 
 - `data.py` : Contient la fonction `open_and_process_data` pour lire et prétraiter les données, convertissant les données brutes en un DataFrame pandas structuré.
 
-- `geodata.py` : Fournit la fonction `get_geodata` qui récupère les données géographiques dans un GeoDataFrame GeoPandas, pour utilisation dans les cartes et `update_geojson` pour ajouter des données au geojson
+- `geodata.py` : Fournit la fonction `get_geodata` qui récupère les données géographiques dans un GeoDataFrame GeoPandas, pour utilisation dans les cartes et `update_geojson` pour ajouter des données au geojson.
 
 - `graphs.py` : Inclut des fonctions comme `histofunding` qui créent des représentations visuelles des données, telles que des histogrammes, en utilisant la bibliothèque Plotly.
 
