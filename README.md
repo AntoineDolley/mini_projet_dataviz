@@ -9,11 +9,6 @@ Ce projet a été développé en utilisant Git pour le contrôle de version. Les
 ## Données Utilisées
 Les données pour ce projet comprennent les informations sur les startups aux États-Unis, y compris leur emplacement, le nombre de relations, les fonds reçus, et leur statut final ('acquired' ou 'closed'). Les sources des données incluent [XYZ Dataset], [ABC Survey], ses données sont issues du [data sprint #5](https://aiplanet.com/challenges/32/data-sprint-5-startup-success-prediction-32/overview/about) organisé par aiplanet
 
-## Principales Conclusions
-- La Californie et New York sont les principaux hubs de startups.
-- Une corrélation positive a été observée entre le nombre de relations d'une startup et son taux de réussite.
-- Les startups avec un financement plus élevé ont tendance à avoir un taux de réussite plus élevé.
-
 ## User Guide
 Pour configurer le projet localement :
 1. Clonez le dépôt avec `git clone https://github.com/AntoineDolley/mini_projet_dataviz`.
@@ -39,11 +34,11 @@ Le projet est structuré en plusieurs modules Python, chacun ayant un rôle spé
 
 - `data.py` : Contient la fonction `open_and_process_data` pour lire et prétraiter les données, convertissant les données brutes en un DataFrame pandas structuré.
 
-- `geodata.py` : Fournit la fonction `get_geodata` qui récupère les données géographiques, probablement dans un GeoDataFrame GeoPandas, pour utilisation dans les cartes.
+- `geodata.py` : Fournit la fonction `get_geodata` qui récupère les données géographiques dans un GeoDataFrame GeoPandas, pour utilisation dans les cartes et `update_geojson` pour ajouter des données au geojson
 
 - `graphs.py` : Inclut des fonctions comme `histofunding` qui créent des représentations visuelles des données, telles que des histogrammes, en utilisant la bibliothèque Plotly.
 
-- `map.py` : Contient des fonctions telles que `set_background_color` pour configurer les visualisations de cartes, utilisant potentiellement la bibliothèque Folium pour le rendu des cartes.
+- `map.py` : Contient des fonctions telles que `create_3maps_dict` pour configurer les visualisations de cartes, utilisant la bibliothèque Folium pour le rendu des cartes.
 
 ### Interactions entre les Modules
 
@@ -62,8 +57,6 @@ Pour étendre la fonctionnalité ou ajouter de nouvelles caractéristiques au pr
 5. Mettez à jour `main.py` s'il y a des changements significatifs dans l'initialisation de l'application ou son déroulement.
 
 Pour des instructions plus détaillées sur l'utilisation et la personnalisation des modules individuels, référez-vous aux commentaires en ligne et aux docstrings dans chaque fichier.
-
-
 
 ---
 
@@ -88,6 +81,11 @@ Pour des instructions plus détaillées sur l'utilisation et la personnalisation
 
 ## Statut des Startups
 - **'Acquired' vs 'Closed'** : Le statut final des startups est utilisé comme indicateur de succès, avec 'acquired' indiquant une acquisition (et donc un succès) et 'closed' indiquant une fermeture de l'entreprise.
+
+## Principales Conclusions
+- La Californie et New York sont les principaux hubs de startups.
+- Une corrélation positive a été observée entre le nombre de relations d'une startup et son taux de réussite.
+- Les startups avec un financement plus élevé ont tendance à avoir un taux de réussite plus élevé.
 
 ---
 
