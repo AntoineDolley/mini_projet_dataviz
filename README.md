@@ -8,10 +8,11 @@ Ce projet a été développé en utilisant Git pour le contrôle de version. Les
 
 ## Données Utilisées
 Les données pour ce projet comprennent les informations sur les startups aux États-Unis, y compris leur emplacement, le nombre de relations, les fonds reçus, et leur statut final ('acquired' ou 'closed'). Ses données sont issues du [data sprint #5](https://aiplanet.com/challenges/32/data-sprint-5-startup-success-prediction-32/overview/about) organisé par aiplanet.
+Pour les cartes nous avons utilisé des données geographiques des etats des Etats-Unis fournit par [Eric Celeste](https://eric.clst.org/tech/usgeojson/).
 
 ## User Guide
 Pour configurer le projet localement :
-1. Clonez le dépôt avec `git clone https://github.com/AntoineDolley/mini_projet_dataviz`.
+1. Clonez le dépôt avec `git clone https://github.com/AntoineDolley/mini_projet_dataviz.git`.
 2. Allez dans le dossier installé.
 3. Installez les dépendances requises avec `pip install -r requirements.txt`.
 4. Lancez l'application depuis votre terminal avec `python main.py`.
@@ -78,14 +79,11 @@ Pour des instructions plus détaillées sur l'utilisation et la personnalisation
 - **Localisation et Succès** : La distribution géographique des startups influence leur succès, avec des pôles majeurs de l'innovation aux États-Unis notamment la Californie.
 - **Importance des Relations** : Les relations sont un facteur clé du succès des startups, comme le montre la corrélation avec des taux de réussite élevés.
 - **Financement** : Le financement est également crucial, les données indiquant une plus grande probabilité de succès pour les startups bien financées.
+- **Hubs** : La Californie et New York sont les principaux hubs de startups.
+- **Relations** : Une corrélation positive a été observée entre le nombre de relations d'une startup et son taux de réussite.
 
 ## Statut des Startups
 - **'Acquired' vs 'Closed'** : Le statut final des startups est utilisé comme indicateur de succès, avec 'acquired' indiquant une acquisition (et donc un succès) et 'closed' indiquant une fermeture de l'entreprise.
-
-## Principales Conclusions
-- La Californie et New York sont les principaux hubs de startups.
-- Une corrélation positive a été observée entre le nombre de relations d'une startup et son taux de réussite.
-- Les startups avec un financement plus élevé ont tendance à avoir un taux de réussite plus élevé.
 
 ---
 
