@@ -63,6 +63,9 @@ Pour des instructions plus détaillées sur l'utilisation et la personnalisation
 
 ## Visualisations
 
+## Statut des Startups
+- **'Acquired' vs 'Closed'** : Le statut final des startups est utilisé comme indicateur de succès, avec 'acquired' indiquant une acquisition (et donc un succès) et 'closed' indiquant une fermeture de l'entreprise.
+
 ### Chloropleth Map des États-Unis
 - **Nombre de startups par région** : La majorité des startups sont situées en Californie, New York, Massachusetts, Washington et Texas, avec une concentration significative en Californie.
 - **Relations moyennes par région** : Les moyennes régionales des relations sont généralement élevées, avec des valeurs comme 8,7 à New York et 8,4 en Californie. L'Indiana présente une moyenne de 19, ce qui pourrait être dû à un échantillon de taille réduite.
@@ -81,9 +84,6 @@ Pour des instructions plus détaillées sur l'utilisation et la personnalisation
 - **Financement** : Le financement est également crucial, les données indiquant une plus grande probabilité de succès pour les startups bien financées.
 - **Hubs** : La Californie et New York sont les principaux hubs de startups.
 - **Relations** : Une corrélation positive a été observée entre le nombre de relations d'une startup et son taux de réussite.
-
-## Statut des Startups
-- **'Acquired' vs 'Closed'** : Le statut final des startups est utilisé comme indicateur de succès, avec 'acquired' indiquant une acquisition (et donc un succès) et 'closed' indiquant une fermeture de l'entreprise.
 
 ---
 
